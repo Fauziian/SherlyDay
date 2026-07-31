@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Girlfriend Day, Sherly Agustina 💕</title>
+  <meta name="description" content="Hadiah romantis digital untuk Sherly Agustina — Happy Girlfriend Day! 💗" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Dancing+Script:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- LOCK SCREEN -->
+  <div id="lockScreen" class="lock-screen">
+    <canvas id="starsCanvas" class="stars-canvas"></canvas>
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- Normal countdown -->
+    <div id="lockNormal" class="lock-normal">
+      <div class="lock-icon-wrap">
+        <div class="lock-heart-glow"></div>
+        <div class="lock-icon">
+          <svg viewBox="0 0 24 24" width="80" height="80">
+            <path
+              d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+              fill="#ff6eb4" />
+          </svg>
+          <svg viewBox="0 0 24 24" width="48" height="48" style="margin-left:-10px">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="#ff6eb4" />
+          </svg>
+        </div>
+      </div>
+      <h1 class="lock-title">Hi<br /><span class="lock-name">Sherly Agustina</span><br />I hope tomorrow turns out to be a good day yaa!</h1>
+      <p class="lock-subtitle">Web ini akan kebuka otomatis pada...</p>
+      <div class="digital-countdown" id="digitalCountdown">00:00:00</div>
+    </div>
+    <!-- Celebration overlay -->
+    <div id="lockCelebration" class="lock-celebration hidden">
+      <div class="celeb-text">00:00<br />Selamat Hari Pacar,<br /><span class="celeb-name">Sherly Agustina!</span><br />
+        <svg viewBox="0 0 24 24" width="40" height="40" style="vertical-align:middle">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            fill="#ff6eb4" />
+        </svg>
+        <svg viewBox="0 0 24 24" width="40" height="40" style="vertical-align:middle">
+          <path
+            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"
+            fill="#ffd700" />
+        </svg>
+      </div>
+    </div>
+
+    <button id="muteBtn" class="mute-btn" onclick="toggleMute()" title="Toggle Sound">
+      <svg viewBox="0 0 24 24" width="18" height="18">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"
+          fill="white" />
+      </svg>
+    </button>
+  </div>
+
+
+  <!-- MAIN APP -->
+  <div id="mainApp" class="main-app hidden">
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Music control button -->
+    <div class="music-bar" id="musicBar">
+      <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Toggle Music">
+        <span class="music-icon" id="musicIcon">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M12 3v10.55A4 4 0 1014 17V7h4V3z" fill="white" />
+          </svg>
+        </span>
+        <span class="music-waves" id="musicWaves">
+          <span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span>
+        </span>
+      </button>
+      <div class="music-info">
+        <span class="music-title">Nuca – Mashup Version</span>
+        <span class="music-sub">01:56 – 04:00 &nbsp;<span id="musicHint" style="display:none;color:#ff6eb4;">&#9654; tap
+            untuk dengar</span></span>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <canvas id="heroCanvas" class="hero-canvas"></canvas>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:middle;margin-right:4px">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="#ff6eb4" />
+          </svg>
+          Special for You
+        </div>
+        <h1 class="hero-title">Happy <span class="gradient-text">Girlfriend</span> Day</h1>
+        <p class="hero-name">Sherly Agustina</p>
+        <p class="hero-tagline">Buat km yg selalu ada di hati ak</p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="scrollToSection('reasons')">
+            <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                fill="white" />
+            </svg>
+            Alasan Sayang
+          </button>
+          <button class="btn-secondary" onclick="scrollToSection('gallery')">
+            <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px">
+              <path
+                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                fill="currentColor" />
+            </svg>
+            Galeri Favorit
+          </button>
+        </div>
+        <div class="hero-scroll-hint">Scroll untuk kejutan ↓</div>
+      </div>
+      <div class="deco-circle deco-1"></div>
+      <div class="deco-circle deco-2"></div>
+      <div class="deco-circle deco-3"></div>
+    </section>
+
+    <!-- REASONS -->
+    <section class="section reasons-section" id="reasons">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">
+            <svg viewBox="0 0 24 24" width="12" height="12" style="vertical-align:middle;margin-right:4px">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                fill="#9b59f7" />
+            </svg>
+            Dari Hati
+          </span>
+          <h2 class="section-title">Alasan Ak Sayang Km</h2>
+          <p class="section-sub">Tiap hari ak nemu alasan baru buat cinta km, Sherly. Fr fr...</p>
+        </div>
+        <div class="reasons-grid" id="reasonsGrid"></div>
+      </div>
+    </section>
+
+    <!-- SURPRISE -->
+    <section class="section surprise-section" id="surprise">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">
+            <svg viewBox="0 0 24 24" width="12" height="12" style="vertical-align:middle;margin-right:4px">
+              <path
+                d="M20 6h-2.18c.07-.44.18-.88.18-1.36C18 2.05 15.96 0 13.5 0c-1.3 0-2.4.58-3.16 1.5L12 3.4l1.66-1.9C14.17 1 14.84.5 13.5.5 12.12.5 11 1.62 11 3c0 1.18.85 2.12 1.96 2.4L11.5 7H4L2 22h20L20 6zm-8 11c-.83 0-1.5-.67-1.5-1.5S11.17 14 12 14s1.5.67 1.5 1.5S12.83 17 12 17z"
+                fill="#9b59f7" />
+            </svg>
+            Kejutan
+          </span>
+          <h2 class="section-title">Kotak Kejutan Buat Km</h2>
+          <p class="section-sub">Tap tiap kotak buat buka kejutan spesial dari ak
+            <svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:middle">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                fill="#ffd700" />
+            </svg>
+          </p>
+        </div>
+        <div class="surprise-grid" id="surpriseGrid"></div>
+      </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section class="section letter-section" id="letter">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">
+            <svg viewBox="0 0 24 24" width="12" height="12" style="vertical-align:middle;margin-right:4px">
+              <path
+                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                fill="#9b59f7" />
+            </svg>
+            Surat Cinta
+          </span>
+          <h2 class="section-title">Surat dari Hati Ak</h2>
+        </div>
+        <!-- 3D Envelope container -->
+        <div class="envelope-prompt-text font-outfit">Tap untuk buka surat cinta 💌</div>
+        <div class="envelope-wrapper" onclick="toggleEnvelope()">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-pocket-left"></div>
+            <div class="envelope-pocket-right"></div>
+            <div class="letter-paper">
+              <div class="letter-deco" style="text-align: center; margin-bottom: 1rem;">
+                <svg viewBox="0 0 24 24" width="40" height="40" style="vertical-align:middle">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff6eb4" />
+                </svg>
+              </div>
+              <div class="letter-body" id="letterBody"></div>
+              <div class="letter-sig">
+                Dgn segenap cinta,<br />
+                <span class="sig-name">Rifqi Fauzi (Leviaakaman)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section gallery-section" id="gallery">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">
+            <svg viewBox="0 0 24 24" width="12" height="12" style="vertical-align:middle;margin-right:4px">
+              <path
+                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                fill="#9b59f7" />
+            </svg>
+            Galeri Favorit
+          </span>
+          <h2 class="section-title">Galeri yang Aku Sukai</h2>
+          <p class="section-sub">Moment Foto / Pap mu bakal aku terus simpan Galeri Favoritku</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="section closing-section" id="closing">
+      <canvas id="closingCanvas" class="closing-canvas"></canvas>
+      <div class="section-inner closing-inner">
+        <div class="closing-heart">
+          <svg viewBox="0 0 24 24" width="64" height="64">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="#ff6eb4" />
+          </svg>
+        </div>
+        <h2 class="closing-title">Selamat Hari Pacar,<br /><span class="gradient-text">Sherly Agustina</span></h2>
+        <p class="closing-msg">Makasih udh hadir di hidup ak & jd cahaya yg nenerangin hari-hari ak. Km itu alasan
+          senyum ak, alasan semangat ak, & alasan ak percaya kalo cinta itu nyata. Ak cinta km dgn sepenuh hati —
+          kemarin, hari ini, & selamanya. No cap, fr fr.</p>
+        <div class="closing-date">
+          <svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:middle;margin-right:4px">
+            <path
+              d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"
+              fill="rgba(255,255,255,0.4)" />
+          </svg>
+          Happy Girlfriend Day &middot; 2026
+        </div>
+        <button class="btn-primary" onclick="triggerCelebration()">
+          <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px">
+            <path
+              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"
+              fill="white" />
+          </svg>
+          Rayakan Bareng!
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- MODAL -->
+  <div id="surpriseModal" class="modal-overlay hidden" onclick="closeModalOverlay(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeSurpriseModal()">✕</button>
+      <div class="modal-icon" id="modalIcon"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-text" id="modalText"></p>
+      <button class="btn-primary" onclick="closeSurpriseModal()">Ak Cinta Km</button>
+    </div>
+  </div>
+
+  <!-- PROPOSAL/CELEBRATION OVERLAY -->
+  <div id="proposalOverlay" class="proposal-overlay hidden">
+    <div class="proposal-bg">
+      <div id="proposalStars" class="proposal-stars"></div>
+      <div id="proposalPetals" class="proposal-petals"></div>
+    </div>
+
+    <!-- 1. PROPOSAL CHARACTER STAGE -->
+    <div id="proposalStageContainer" class="proposal-container">
+      <div class="doodle-card">
+        <!-- Floating Hearts inside the card background -->
+        <div class="doodle-card-hearts">
+          <span style="left:10%; top:20%;">💖</span>
+          <span style="right:12%; top:15%;">💗</span>
+          <span style="left:8%; bottom:30%;">💓</span>
+          <span style="right:10%; bottom:25%;">🌸</span>
+        </div>
+
+        <div class="doodle-card-title">Aku Mencintaimu</div>
+
+        <svg class="doodle-svg" viewBox="0 0 600 400">
+          <defs>
+            <filter id="heartShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feOffset dx="0" dy="3" result="offset" />
+              <feComposite in="SourceGraphic" in2="offset" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Cute dashed pink path forming a heart loop at the bottom -->
+          <path class="doodle-dashed-line"
+            d="M 100,345 C 240,345 285,345 290,345 C 295,335 300,335 305,345 C 310,345 350,345 500,345" stroke="#ff8da1"
+            stroke-width="3" stroke-dasharray="6,6" fill="none" stroke-linecap="round" />
+          <path class="doodle-dashed-heart"
+            d="M 300,345 C 292,335 282,335 282,345 C 282,355 300,365 300,365 C 300,365 318,355 318,345 C 318,335 308,335 300,345 Z"
+            stroke="#ff8da1" stroke-width="3" stroke-dasharray="5,5" fill="none" />
+
+          <!-- BOY GROUP -->
+          <g class="doodle-boy">
+            <!-- Head -->
+            <circle cx="200" cy="165" r="42" stroke="#2b2b2b" stroke-width="3.5" fill="#ffffff" />
+            <!-- Eyes (smiling ovals) -->
+            <path d="M 183 162 C 187 156 195 156 199 162" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" />
+            <path d="M 205 162 C 209 156 217 156 221 162" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" />
+            <!-- Blushing cheeks -->
+            <ellipse cx="178" cy="172" rx="7" ry="4" fill="#ffb2c8" />
+            <ellipse cx="222" cy="172" rx="7" ry="4" fill="#ffb2c8" />
+            <!-- Smile -->
+            <path d="M 197 178 Q 202 184 207 178" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" />
+            <!-- Spiky Hair -->
+            <path
+              d="M 160,158 C 158,144 165,134 175,134 C 172,122 184,115 195,120 C 199,108 214,106 225,114 C 232,108 245,112 248,124 C 255,125 258,137 254,148 C 256,155 251,162 246,165"
+              stroke="#2b2b2b" stroke-width="3.5" fill="#ffffff" stroke-linejoin="round" />
+            <!-- Body/Shirt -->
+            <path d="M 190,207 L 180,310 L 220,310 L 210,207 Z" stroke="#2b2b2b" stroke-width="3.5" fill="#ffffff"
+              stroke-linejoin="round" />
+            <!-- Arms holding heart (left side) -->
+            <path d="M 196,225 Q 235,230 270,248" stroke="#2b2b2b" stroke-width="4" fill="none"
+              stroke-linecap="round" />
+            <path d="M 196,242 Q 235,248 268,268" stroke="#2b2b2b" stroke-width="4" fill="none"
+              stroke-linecap="round" />
+            <!-- Standing Leg -->
+            <path d="M 192,310 L 192,345 L 183,345" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Kicking/Bent Leg -->
+            <path d="M 208,310 Q 206,328 193,338 L 188,332" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+
+          <!-- GIRL GROUP -->
+          <g class="doodle-girl">
+            <!-- Head -->
+            <circle cx="400" cy="165" r="42" stroke="#2b2b2b" stroke-width="3.5" fill="#ffffff" />
+            <!-- Eyes (smiling ovals) -->
+            <path d="M 383 162 C 387 156 395 156 399 162" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" />
+            <path d="M 405 162 C 409 156 417 156 421 162" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" />
+            <!-- Blushing cheeks -->
+            <ellipse cx="378" cy="172" rx="7" ry="4" fill="#ffb2c8" />
+            <ellipse cx="422" cy="172" rx="7" ry="4" fill="#ffb2c8" />
+            <!-- Smile -->
+            <path d="M 397 178 Q 402 184 407 178" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" />
+            <!-- Long Hair with ponytail and bow -->
+            <path d="M 360,165 C 362,138 382,122 415,125 C 435,127 444,142 442,165" stroke="#2b2b2b" stroke-width="3.5"
+              fill="none" />
+            <!-- Ponytail -->
+            <path d="M 440,152 C 455,142 485,160 480,210 C 475,230 460,225 450,205" stroke="#2b2b2b" stroke-width="3.5"
+              fill="#ffffff" stroke-linejoin="round" />
+            <!-- Pink Ribbon/Bow -->
+            <path d="M 436,145 C 430,138 428,150 435,152 C 442,150 440,138 436,145 Z" fill="#ff7da1" stroke="#2b2b2b"
+              stroke-width="2.5" />
+            <!-- Dress -->
+            <path d="M 390,207 L 380,310 L 420,310 L 410,207 Z" stroke="#2b2b2b" stroke-width="3.5" fill="#ffffff"
+              stroke-linejoin="round" />
+            <!-- Arms holding heart (right side) -->
+            <path d="M 404,225 Q 365,230 330,248" stroke="#2b2b2b" stroke-width="4" fill="none"
+              stroke-linecap="round" />
+            <path d="M 404,242 Q 365,248 332,268" stroke="#2b2b2b" stroke-width="4" fill="none"
+              stroke-linecap="round" />
+            <!-- Standing Leg -->
+            <path d="M 392,310 L 392,345 L 383,345" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Kicking/Bent Leg -->
+            <path d="M 408,310 Q 406,328 419,338 L 424,332" stroke="#2b2b2b" stroke-width="3.5" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+
+          <!-- BIG BEATING HEART -->
+          <g class="doodle-big-heart">
+            <path
+              d="M 300,225 C 275,185 215,185 215,235 C 215,290 300,340 300,340 C 300,340 385,290 385,235 C 385,185 325,185 300,225 Z"
+              fill="#ff527b" stroke="#2b2b2b" stroke-width="3.5" />
+            <!-- Small shine on heart -->
+            <path d="M 235,220 C 235,210 245,205 255,210" stroke="#ffffff" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="proposal-message">
+        <h2 id="proposalTextMain" class="proposal-text-main"></h2>
+      </div>
+    </div>
+
+    <!-- 2. MAP JOURNEY STAGE -->
+    <div id="mapStageContainer" class="map-container hidden">
+      <div class="map-stage">
+        <!-- Custom Map of Java Island (SVG) -->
+        <svg class="map-svg" viewBox="0 0 800 400">
+          <defs>
+            <filter id="glow-map" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <!-- Glowing line gradient -->
+            <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff3d8a" />
+              <stop offset="100%" stop-color="#4fc3f7" />
+            </linearGradient>
+          </defs>
+
+          <!-- Realistic Google Map Background Image of Java -->
+          <image href="map_java.png" x="0" y="30" width="800" height="270"
+            style="border-radius: 16px; opacity: 0.95; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));" />
+
+          <!-- Train Track Route (Bandung to Sidoarjo on actual map) -->
+          <path id="trainTrack" class="train-track" d="M 190,150 Q 280,200 415,230 T 618,220" fill="none"
+            stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-dasharray="6,6" />
+          <path id="trainTrackActive" class="train-track-active" d="M 190,150 Q 280,200 415,230 T 618,220" fill="none"
+            stroke="url(#routeGrad)" stroke-width="4" stroke-dasharray="8,6" filter="url(#glow-map)" />
+
+          <!-- Bandung Marker -->
+          <g class="city-marker marker-bandung" transform="translate(190, 150)">
+            <circle r="18" fill="rgba(255, 61, 138, 0.2)" class="marker-ping" />
+            <circle r="6" fill="#ff3d8a" />
+            <text y="-18" class="city-label">Bandung</text>
+            <text y="-32" class="city-sub-label">Rifqi Fauzi (Leviaakaman)</text>
+          </g>
+
+          <!-- Sidoarjo Marker -->
+          <g class="city-marker marker-sidoarjo" transform="translate(618, 220)">
+            <circle id="sidoarjoPing" r="18" fill="rgba(79, 195, 247, 0.2)" class="marker-ping" />
+            <circle r="6" fill="#4fc3f7" />
+            <text y="-18" class="city-label">Sidoarjo</text>
+            <text y="-32" class="city-sub-label">Sherly Agustina</text>
+          </g>
+
+          <!-- Animated Train Icon -->
+          <g id="trainIcon" class="train-icon-group" opacity="0">
+            <!-- Train Engine SVG Silhouette -->
+            <path
+              d="M-12 -6 L4 -6 L8 -2 L8 4 L-12 4 Z M-12 4 L-12 6 A 2 2 0 0 0 -10 8 A 2 2 0 0 0 -8 6 Z M4 4 L4 6 A 2 2 0 0 0 6 8 A 2 2 0 0 0 8 6 Z"
+              fill="#ffffff" filter="url(#glow-map)" />
+            <!-- Heart smoke bubble -->
+            <path d="M 8,-12 C 7,-14 5,-14 5,-12 C 5,-10 8,-7 8,-7 C 8,-7 11,-10 11,-12 C 11,-14 9,-14 8,-12 Z"
+              fill="#ff6eb4" class="train-smoke" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Live Travel Message Board -->
+      <div class="travel-board">
+        <div class="travel-status-title" id="travelStatusTitle">Menyiapkan Perjalanan...</div>
+        <div class="travel-details" id="travelDetails">
+          <div class="travel-detail-card font-outfit">
+            <span class="detail-label">Tanggal Berangkat (Kereta Api)</span>
+            <span class="detail-val text-pink">21 Agustus 📅</span>
+          </div>
+          <div class="travel-arrow">➔</div>
+          <div class="travel-detail-card font-outfit">
+            <span class="detail-label">Mendatangimu (Sidoarjo)</span>
+            <span class="detail-val text-blue">22 Agustus 💗</span>
+          </div>
+        </div>
+        <div class="travel-message" id="travelMessage">Ak otw ke sana buat ketemu km, Sherly! No cap, see you soon...
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. FLOWER BOUQUET STAGE -->
+    <div id="flowerStageContainer" class="flower-container hidden">
+      <div class="flower-card-3d">
+        <!-- Floating flower petals and sparkles inside the card -->
+        <div class="flower-glow"></div>
+        <div class="flower-sparkles" id="flowerSparkles"></div>
+        
+        <!-- The SVG Flower Bouquet itself -->
+        <div class="bouquet-wrapper">
+          <svg class="bouquet-svg" viewBox="0 0 400 500">
+            <!-- Wrapping Paper Back -->
+            <path class="bouquet-wrap-back" d="M 120,380 L 70,220 L 200,100 L 330,220 L 280,380 Z" fill="#e0c7a8" stroke="#bfa382" stroke-width="3" />
+            
+            <!-- Green Stems & Leaves -->
+            <g class="bouquet-foliage">
+              <!-- Leaves behind -->
+              <path d="M 110,240 Q 60,180 80,130 Q 110,160 120,220 Z" fill="#527853" />
+              <path d="M 290,240 Q 340,180 320,130 Q 290,160 280,220 Z" fill="#527853" />
+              <path d="M 200,200 Q 200,100 230,80 Q 250,110 210,180 Z" fill="#3f5e3d" />
+              
+              <!-- Stems -->
+              <line x1="200" y1="420" x2="160" y2="280" stroke="#527853" stroke-width="8" stroke-linecap="round" />
+              <line x1="200" y1="420" x2="200" y2="260" stroke="#3f5e3d" stroke-width="8" stroke-linecap="round" />
+              <line x1="200" y1="420" x2="240" y2="280" stroke="#527853" stroke-width="8" stroke-linecap="round" />
+            </g>
+            
+            <!-- Blooming Flowers (Group that will scale up during animation) -->
+            <g class="bouquet-flowers">
+              <!-- Pink Rose 1 (Left) -->
+              <g class="flower flower-1">
+                <circle cx="140" cy="190" r="32" fill="#ff7da1" />
+                <path d="M 140,158 C 120,170 120,210 140,222 C 160,210 160,170 140,158 Z" fill="#ff527b" />
+                <circle cx="140" cy="190" r="16" fill="#ffccd8" />
+                <circle cx="140" cy="190" r="6" fill="#ff527b" />
+              </g>
+              
+              <!-- Pink Rose 2 (Right) -->
+              <g class="flower flower-2">
+                <circle cx="260" cy="190" r="32" fill="#ff7da1" />
+                <path d="M 260,158 C 240,170 240,210 260,222 C 280,210 280,170 260,158 Z" fill="#ff527b" />
+                <circle cx="260" cy="190" r="16" fill="#ffccd8" />
+                <circle cx="260" cy="190" r="6" fill="#ff527b" />
+              </g>
+              
+              <!-- Red Rose (Center Top) -->
+              <g class="flower flower-3">
+                <circle cx="200" cy="140" r="38" fill="#e02447" />
+                <path d="M 200,102 C 175,115 175,165 200,178 C 225,165 225,115 200,102 Z" fill="#b81431" />
+                <circle cx="200" cy="140" r="20" fill="#ff4d6a" />
+                <circle cx="200" cy="140" r="8" fill="#b81431" />
+              </g>
+              
+              <!-- White/Cream Lilies (Center Bottom) -->
+              <g class="flower flower-4">
+                <path d="M 200,210 C 180,180 160,210 200,240 C 240,210 220,180 200,210 Z" fill="#fff5ea" />
+                <circle cx="200" cy="218" r="8" fill="#ffcc00" />
+              </g>
+              <g class="flower flower-5">
+                <path d="M 150,240 C 130,210 110,240 150,270 C 190,240 170,210 150,240 Z" fill="#fff5ea" />
+                <circle cx="150" cy="248" r="6" fill="#ffcc00" />
+              </g>
+              <g class="flower flower-6">
+                <path d="M 250,240 C 230,210 210,240 250,270 C 290,240 270,210 250,240 Z" fill="#fff5ea" />
+                <circle cx="250" cy="248" r="6" fill="#ffcc00" />
+              </g>
+            </g>
+            
+            <!-- Wrapping Paper Front -->
+            <path class="bouquet-wrap-front" d="M 120,380 L 60,220 C 110,260 290,260 340,220 L 280,380 Z" fill="#d2b48c" stroke="#bfa382" stroke-width="2" />
+            <!-- Beautiful Blue Ribbon -->
+            <path class="bouquet-ribbon" d="M 170,370 C 180,385 220,385 230,370 Q 250,350 260,390 L 240,430 L 210,390 L 190,390 L 160,430 Z" fill="#4fc3f7" stroke="#0288d1" stroke-width="2" />
+            <circle cx="200" cy="375" r="8" fill="#0288d1" />
+          </svg>
+        </div>
+        
+        <div class="flower-message">
+          <h2 class="flower-title">Sebuket Bunga Cantik Buat Sherly 💐</h2>
+          <p class="flower-subtitle">Semoga bunga ini bisa mewakili rasa sayang ak ke km!</p>
+          <button class="btn-primary btn-flower-next" onclick="closeFlowerStage()">Lanjut ❤️</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
