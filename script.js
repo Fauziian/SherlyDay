@@ -101,35 +101,6 @@ async function unlockAudio() {
   }
 }
 
-async function aggressiveAudioPreload() {
-  try {
-    initAudio();
-    bgAudio.volume = 0.001;
-    bgAudio.muted = false;
-    bgAudio.currentTime = AUDIO_START;
-    
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (AudioContextClass) {
-      const ctx = getAudioCtx();
-      if (ctx.state === 'suspended') {
-        await ctx.resume();
-      }
-    }
-    
-    const playPromise = bgAudio.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        bgAudio.pause();
-        bgAudio.volume = 0.85;
-        audioUnlocked = true;
-      }).catch(() => {
-        audioUnlocked = true;
-      });
-    }
-  } catch (e) {
-    audioUnlocked = true;
-  }
-}
 
 function fadeInMusic() {
   initAudio();
@@ -425,15 +396,31 @@ function startCountdown() {
   // Ensure we clear any stale state
   document.documentElement.classList.remove('grayscale-active');
 
-  // Aggressively preload and unlock audio on page load
-  aggressiveAudioPreload();
+  // Audio starts muted - user must click to unlock
+  isMuted = true;
+  audioMuted = true;
+  initAudio();
+  document.getElementById('muteBtn').textContent = '🔇';
 
-  // TEST MODE: Use 10 seconds for testing
-  countdownDuration = 10;
+  // Add click listener to unlock audio on first user interaction
+  document.addEventListener('click', unlockAudioOnClick, { once: true });
+  document.addEventListener('touchstart', unlockAudioOnClick, { once: true });
+
+  // Calculate countdown to next midnight
+  const target = getMidnightTarget();
+  const now = new Date();
+  countdownDuration = Math.max(0, Math.floor((target - now) / 1000));
 
   clearInterval(countdownInterval);
   countdownInterval = setInterval(tick, 1000);
   tick();
+}
+
+function unlockAudioOnClick() {
+  isMuted = false;
+  audioMuted = false;
+  document.getElementById('muteBtn').textContent = '🔊';
+  initAudio();
 }
 
 function tick() {
