@@ -406,10 +406,8 @@ function startCountdown() {
   document.addEventListener('click', unlockAudioOnClick, { once: true });
   document.addEventListener('touchstart', unlockAudioOnClick, { once: true });
 
-  // Calculate countdown to next midnight
-  const target = getMidnightTarget();
-  const now = new Date();
-  countdownDuration = Math.max(0, Math.floor((target - now) / 1000));
+  // Use a fixed 12-second delay instead of waiting for midnight
+  countdownDuration = 12;
 
   clearInterval(countdownInterval);
   countdownInterval = setInterval(tick, 1000);
